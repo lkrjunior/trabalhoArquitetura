@@ -1,5 +1,7 @@
 # Trabalho Arquitetura
-
+<br>
+[![Build Status](https://travis-ci.org/lkrjunior/trabalhoArquitetura.svg?branch=master)](https://travis-ci.org/lkrjunior/trabalhoArquitetura)
+<br>
 Sistema para upload de fotos - UpPhotos
 
 Linguagem: 
