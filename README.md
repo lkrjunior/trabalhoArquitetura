@@ -3,20 +3,20 @@
 Sistema para upload de fotos - UpPhotos
 
 Linguagem: 
-Java
+    Java
 
 Recursos APIs:
-  Status 
-    GetVersion - GET
-  People
-    SavePeople - PUT
-    GetPeople - GET
-    DeletePeople - DELETE
-    ListPeople - GET
-  Photo
-    SavePhoto - PUT
-    GetPhoto - GET
-    ListPhoto - GET
+    Status
+        GetVersion - GET
+    People
+        SavePeople - PUT
+        GetPeople - GET
+        DeletePeople - DELETE
+        ListPeople - GET
+    Photo
+        SavePhoto - PUT
+        GetPhoto - GET
+        ListPhoto - GET
 
 Banco H2 local para salvar as pessoas e o link para foto
 Integração com o Dropbox para salvar as fotos
