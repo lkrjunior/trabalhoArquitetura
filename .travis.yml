@@ -14,9 +14,3 @@ cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-
-deploy:
-    provider: heroku
-    api_key:
-      secure: f4a60429-abff-408e-a92e-dda58557e76d
-      app: upphotos-uniritter
