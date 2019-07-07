@@ -33,7 +33,7 @@ public class StatusController {
     @ResponseBody
     public ModelAndView Home()
     {
-        return new ModelAndView("/home");
+        return new ModelAndView("home");
     }
 
     @GetMapping("/testjpainsert")
