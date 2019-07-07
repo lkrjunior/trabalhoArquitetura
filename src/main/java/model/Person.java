@@ -3,13 +3,14 @@ package model;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "PERSON")
 @EnableAutoConfiguration
-public class Person {
+public class Person implements Serializable {
 
     @Id
     @Column(name = "ID_PERSON")

@@ -6,12 +6,13 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "PHOTO")
 @EnableAutoConfiguration
-public class Photo {
+public class Photo implements Serializable {
 
     @Id
     @Column(name = "ID_PHOTO")

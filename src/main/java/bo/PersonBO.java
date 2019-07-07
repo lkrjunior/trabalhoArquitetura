@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import repository.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonBO
@@ -45,5 +46,25 @@ public class PersonBO
     public void TestJpaDelete()
     {
         personRepository.deleteAll();
+    }
+
+    public void Save(Person person)
+    {
+        personRepository.save(person);
+    }
+
+    public List<Person> FindAll()
+    {
+        return personRepository.findAll();
+    }
+
+    public Optional<Person> FindOne(long id)
+    {
+        return personRepository.findById(id);
+    }
+
+    public void Delete(Person person)
+    {
+        personRepository.delete(person);
     }
 }
