@@ -11,6 +11,7 @@ public class UpphotosApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		assert(true);
 	}
 
 }
