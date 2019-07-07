@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Photo Upload</title>
+    <link href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" rel="stylesheet" />
+    <script th:src="@{/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Photo Upload</strong>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${photo}" th:action="@{/photo/save}" method="POST" style="margin: 10px" enctype="multipart/form-data">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="col-md-1">
+                            <input type="text" class="form-control input-sm" name="id" id="id" th:field="*{person.id}" readOnly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label>Photo</label>
+                            <input type="file" class="form-control input-sm" name="file" autofocus="autofocus" placeholder="Image" accept="image/*"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                <a th:href="@{/person}" class="btn btn-sm btn-default">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

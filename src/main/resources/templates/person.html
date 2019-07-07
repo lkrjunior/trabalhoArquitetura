@@ -30,9 +30,13 @@
                     <td th:text="${person.cpf}"></td>
                     <td th:text="${person.name}"></td>
                     <td>
-                        <div class="btn-group pull-right">
+                        <div class="btn-group pull-left">
                             <a class="btn btn-sm btn-primary" th:href="@{person/edit/{id}(id=${person.id})}" >Edit</a>
                             <a class="delete btn btn-sm btn-danger" th:href="@{person/delete/{id}(id=${person.id})}">Delete</a>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-sm btn-info" th:href="@{photo/upload/{id}(id=${person.id})}" >Upload photo</a>
+                            <a class="btn btn-sm btn-success" th:href="@{photo/all/{id}(id=${person.id})}" >View photos</a>
                         </div>
                     </td>
                 </tr>
