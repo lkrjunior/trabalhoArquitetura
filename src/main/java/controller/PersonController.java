@@ -27,7 +27,7 @@ public class PersonController {
     @GetMapping("")
     public ModelAndView findAll() {
 
-        ModelAndView modelAndView = new ModelAndView("/person");
+        ModelAndView modelAndView = new ModelAndView("person");
         modelAndView.addObject("persons", personBO.FindAll());
 
         return modelAndView;
@@ -59,7 +59,7 @@ public class PersonController {
     @GetMapping("/add")
     public ModelAndView add(Person person) {
 
-        ModelAndView modelAndView = new ModelAndView("/personAdd");
+        ModelAndView modelAndView = new ModelAndView("personAdd");
         modelAndView.addObject("person", person);
 
         return modelAndView;
