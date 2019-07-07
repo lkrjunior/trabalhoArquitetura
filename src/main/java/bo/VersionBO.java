@@ -3,7 +3,6 @@ package bo;
 import model.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import repository.VersionRepository;
 import javax.persistence.EntityNotFoundException;
 

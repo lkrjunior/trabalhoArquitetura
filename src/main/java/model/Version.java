@@ -14,11 +14,11 @@ public class Version {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "VERSION")
+    @Column(name = "VALUE")
     @NotNull
-    private String version;
+    private String value;
 
-    public String getVersion() {
-        return version;
+    public String getValue() {
+        return value;
     }
 }
