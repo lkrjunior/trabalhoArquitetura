@@ -10,8 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/photo")
@@ -23,10 +22,32 @@ public class PhotoController {
     @Autowired
     PersonBO personBO;
 
+    private List<Photo> FixPhotos(List<Photo> photos)
+    {
+        for (Photo item : photos) {
+            item.setPhotoString("data:image/jpg;base64," + Base64.getEncoder().encodeToString(item.getPhoto()));
+        }
+        return photos;
+    }
+
+    private ModelAndView GetHomePerson()
+    {
+        ModelAndView modelAndView =  new ModelAndView("redirect:/person");
+        return modelAndView;
+    }
+
     private ModelAndView SetModelView(String viewName, Photo photo)
     {
         ModelAndView modelAndView = new ModelAndView(viewName);
         modelAndView.addObject("photo", photo);
+
+        return modelAndView;
+    }
+
+    private ModelAndView SetModelViewList(String viewName, List<Photo> photos)
+    {
+        ModelAndView modelAndView = new ModelAndView(viewName);
+        modelAndView.addObject("photos", photos);
 
         return modelAndView;
     }
@@ -56,7 +77,10 @@ public class PhotoController {
 
         Optional<Person> person = personBO.FindOne(id);
         if (person != null) {
-            return SetModelView("photoView", CreatePhotoWithPerson(person.get()));
+            List<Photo> photos = new ArrayList<>(person.get().getPhotos());
+            photos = FixPhotos(photos);
+
+            return SetModelViewList("photoView", photos);
         }
         else {
             return SetModelView("person", null);
@@ -65,13 +89,13 @@ public class PhotoController {
 
     @PostMapping(value = "/save", consumes = "multipart/form-data")
     @ResponseBody
-    public ModelAndView SavePhoto(@RequestPart("file") MultipartFile file, @Valid Photo photo, BindingResult result) {
+    public ModelAndView SavePhoto(@RequestPart("file") MultipartFile file, @Valid Photo photo, BindingResult result) throws IOException {
         if(result.hasErrors()) {
-            return SetModelView("person", null);
+            return GetHomePerson();
         }
 
-        //personBO.Save(person);
+        photoBO.Save(photo, file);
 
-        return SetModelView("person", null);
+        return GetHomePerson();
     }
 }

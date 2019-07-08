@@ -34,7 +34,11 @@ public class Photo implements Serializable {
     @JsonIgnore
     private Person person;
 
-    private MultipartFile[] image;
+    @Lob
+    @Column(name = "PHOTO")
+    private byte[] photo;
+
+    private String photoString;
 
     public Photo()
     {
@@ -63,5 +67,21 @@ public class Photo implements Serializable {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoString() {
+        return photoString;
+    }
+
+    public void setPhotoString(String photoString) {
+        this.photoString = photoString;
     }
 }
