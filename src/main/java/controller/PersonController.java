@@ -45,7 +45,7 @@ public class PersonController {
         }
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
 
         Optional<Person> person = personBO.FindOne(id);

@@ -31,8 +31,14 @@
                     <td th:text="${person.name}"></td>
                     <td>
                         <div class="btn-group pull-left">
-                            <a class="btn btn-sm btn-primary" th:href="@{person/edit/{id}(id=${person.id})}" >Edit</a>
-                            <a class="delete btn btn-sm btn-danger" th:href="@{person/delete/{id}(id=${person.id})}">Delete</a>
+                            <form th:action="@{person/edit/{id}(id=${person.id})}" th:method="get" th:object="${person}">
+                                <button type="submit" value="Submit" class="btn btn-sm btn-primary">Edit</button>
+                            </form>
+                        </div>
+                        <div class="btn-group pull-left">
+                            <form th:action="@{person/delete/{id}(id=${person.id})}" th:method="delete" th:object="${person}">
+                                <button type="submit" value="Submit" class="delete btn btn-sm btn-danger">Delete</button>
+                            </form>
                         </div>
                         <div class="btn-group pull-right">
                             <a class="btn btn-sm btn-info" th:href="@{photo/upload/{id}(id=${person.id})}" >Upload photo</a>

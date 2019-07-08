@@ -22,14 +22,6 @@ public class PhotoController {
     @Autowired
     PersonBO personBO;
 
-    private List<Photo> FixPhotos(List<Photo> photos)
-    {
-        for (Photo item : photos) {
-            item.setPhotoString("data:image/jpg;base64," + Base64.getEncoder().encodeToString(item.getPhoto()));
-        }
-        return photos;
-    }
-
     private ModelAndView GetHomePerson()
     {
         ModelAndView modelAndView =  new ModelAndView("redirect:/person");
@@ -52,20 +44,12 @@ public class PhotoController {
         return modelAndView;
     }
 
-    private Photo CreatePhotoWithPerson(Person person)
-    {
-        Photo photo = new Photo();
-        photo.setPerson(person);
-
-        return photo;
-    }
-
     @GetMapping("/upload/{id}")
     public ModelAndView upload(@PathVariable("id") Long id) {
 
         Optional<Person> person = personBO.FindOne(id);
         if (person != null) {
-            return SetModelView("photoAdd", CreatePhotoWithPerson(person.get()));
+            return SetModelView("photoAdd", photoBO.CreatePhotoWithPerson(person.get()));
         }
         else {
             return SetModelView("person", null);
@@ -78,7 +62,7 @@ public class PhotoController {
         Optional<Person> person = personBO.FindOne(id);
         if (person != null) {
             List<Photo> photos = new ArrayList<>(person.get().getPhotos());
-            photos = FixPhotos(photos);
+            photos = photoBO.FixPhotos(photos);
 
             return SetModelViewList("photoView", photos);
         }
