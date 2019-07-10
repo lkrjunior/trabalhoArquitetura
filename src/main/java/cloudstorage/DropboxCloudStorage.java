@@ -6,7 +6,8 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.UploadErrorException;
-import helpers.FileHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class DropboxCloudStorage implements ICloudStorageActions {
     private final String _properties = "cloudstorage.properties";
     private final String _property_access_token = "dropbox.accesstoken";
     private final String _message_dont_load_config = "Unable to find properties to Dropbox";
+
+    private static final Logger logger = LoggerFactory.getLogger(DropboxCloudStorage.class);
 
     @Autowired
     private Environment env;
@@ -50,21 +53,21 @@ public class DropboxCloudStorage implements ICloudStorageActions {
         }
         catch (IOException ex)
         {
-            ex.printStackTrace();
+            logger.error(ex.getMessage());
         }
     }
 
     public void UploadFile(InputStream file, String fileName) {
         try {
             client.files().uploadBuilder("/" + fileName).uploadAndFinish(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UploadErrorException e) {
-            e.printStackTrace();
-        } catch (DbxException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            logger.error(ex.getMessage());
+        } catch (IOException ex) {
+            logger.error(ex.getMessage());
+        } catch (UploadErrorException ex) {
+            logger.error(ex.getMessage());
+        } catch (DbxException ex) {
+            logger.error(ex.getMessage());
         }
     }
 
@@ -73,8 +76,8 @@ public class DropboxCloudStorage implements ICloudStorageActions {
         DbxDownloader<FileMetadata> file = null;
         try {
             file = client.files().download("/" + fileName);
-        } catch (DbxException e) {
-            e.printStackTrace();
+        } catch (DbxException ex) {
+            logger.error(ex.getMessage());
         }
 
         return file != null ? file.getInputStream() : null;

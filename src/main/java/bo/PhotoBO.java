@@ -5,6 +5,8 @@ import cloudstorage.ICloudStorageActions;
 import com.dropbox.core.DbxException;
 import helpers.FileHelper;
 import model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,8 @@ import java.util.List;
 @Component
 public class PhotoBO {
     private final String _photo_url_show_html = "data:image/jpg;base64,";
+
+    private static final Logger logger = LoggerFactory.getLogger(PhotoBO.class);
 
     @Autowired
     private PhotoRepository photoRepository;
@@ -54,8 +58,8 @@ public class PhotoBO {
         try {
             ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
             dropboxCloudStorage.UploadFile(FileHelper.ConvertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
-        } catch (DbxException e) {
-            e.printStackTrace();
+        } catch (DbxException ex) {
+            logger.error(ex.getMessage());
         }
         return nameFileToUpload;
     }
@@ -67,11 +71,11 @@ public class PhotoBO {
             InputStream input = dropboxCloudStorage.DownloadFile(fileName);
             return FileHelper.ConvertInputStreamtoByteArray(input);
 
-        } catch (DbxException e) {
-            e.printStackTrace();
+        } catch (DbxException ex) {
+            logger.error(ex.getMessage());
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (IOException ex) {
+            logger.error(ex.getMessage());
         }
         return null;
     }
