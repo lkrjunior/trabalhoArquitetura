@@ -6,12 +6,12 @@
 
 #### Resumo
 
-Sistema para upload de fotos para nuvem.
-Utiliza páginas HTML5 com bootstrap desenvolvidas em Thymeleaf.
-Banco de dados local H2 utilizando JpaRepository como interface de comunicação.
-Implementação do upload/download das fotos com o App Dropbox utilizando AccessToken.
-Continous Integration com o TravisCI e Deploy automatizado no Heroku.
-Monitoramento do site utilizando o Site24x7.
+Sistema para upload de fotos para nuvem.<br>
+Utiliza páginas HTML5 com bootstrap desenvolvidas em Thymeleaf.<br>
+Banco de dados local H2 utilizando JpaRepository como interface de comunicação.<br>
+Implementação do upload/download das fotos com o App Dropbox utilizando AccessToken.<br>
+Continous Integration com o TravisCI e Deploy automatizado no Heroku.<br>
+Monitoramento do site utilizando o Site24x7.<br>
 
 **Recursos APIs**
 
