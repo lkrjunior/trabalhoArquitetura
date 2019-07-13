@@ -52,3 +52,8 @@ Monitoramento do site utilizando o Site24x7.<br>
 **Continuous Deployment**
     
     TravisCI -> Heroku
+    
+**Diagramas**
+    
+* [Arquitetura](https://drive.google.com/file/d/1IhIeq6IcQQE3ersfGaXCiazv_3ee2YXm/view?usp=sharing)
+* [Estrutura do projeto](https://drive.google.com/file/d/1ZiaCUibWYqGDFeAtTxXkTjSgxg375h1z/view?usp=sharing)
