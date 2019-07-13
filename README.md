@@ -1,38 +1,54 @@
 # Trabalho Arquitetura
 
+## Sistema para upload de fotos - UpPhotos
+
 [![Build Status](https://travis-ci.org/lkrjunior/trabalhoArquitetura.svg?branch=master)](https://travis-ci.org/lkrjunior/trabalhoArquitetura)
 
-Sistema para upload de fotos - UpPhotos
+#### Resumo
 
-Linguagem: 
-    Java
+Sistema para upload de fotos para nuvem.
+Utiliza páginas HTML5 com bootstrap desenvolvidas em Thymeleaf.
+Banco de dados local H2 utilizando JpaRepository como interface de comunicação.
+Implementação do upload/download das fotos com o App Dropbox utilizando AccessToken.
+Continous Integration com o TravisCI e Deploy automatizado no Heroku.
+Monitoramento do site utilizando o Site24x7.
 
+**Recursos APIs**
 
-Recursos APIs:
-    Status
-        GetVersion - GET
-    People
-        SavePeople - PUT
-        GetPeople - GET
-        DeletePeople - DELETE
-        ListPeople - GET
-    Photo
-        SavePhoto - PUT
-        GetPhoto - GET
-        ListPhoto - GET
+- /Status
+    - /GetVersion ```GET```
+- /Person
+    - / ```GET```
+    - /Save ```POST```
+    - /Delete/{id} ```DELETE```
+    - /Edit/{id} ```GET```
+- /Photo
+    - /All/{id} ```GET```
+    - /Save ```POST```
+        
+**Estrutura do projeto**
 
-Banco H2 local para salvar as pessoas e o link para foto
-Integração com o Dropbox para salvar as fotos
-Testes unitários e integração com o Postman
+    BO - Camada de negócio
+    Cloudstorage - Implementação da interface de comunicação para upload e download de arquivos na nuvem
+    Controller - APIs REST
+    Model - Modelagem dos dados
+    Repository - Interfaces dos repositorios para comunicação com o banco de dados
 
-Repositorio:
-Github
+**Dependências do projeto**
+    
+    SpringBoot Web
+    SpringBoot Actuator
+    SpringBoot DataJpa
+    SpringBoot JDBC
+    SpringBoot Thymeleaf
+    SpringBoot Test
+    H2Database
+    Dropbox-core-jdk
+    
+**Monitoramento**
 
-Monitoramento:
-	?? Depois do MVP site24x7 - teste de derrubar
-
-CI/CD:
-Travis -> Heroku
-
-Escalabilidade:
-	?? Depois do MVP
+    Site24x7
+    
+**Continuous Deployment**
+    
+    TravisCI -> Heroku
