@@ -39,7 +39,7 @@ public class PersonRepositoryTests {
 
         assertNotNull(personGet);
         assertEquals(person.getName(), personGet.get().getName());
-        assertEquals(person.getCpf(), personGet.get().getCpf());
+        assertEquals(person.getCpf(), personGet.get().getName());
     }
 
     @Test
