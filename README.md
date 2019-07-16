@@ -3,6 +3,7 @@
 ## Sistema para upload de fotos - UpPhotos
 
 [![Build Status](https://travis-ci.org/lkrjunior/trabalhoArquitetura.svg?branch=master)](https://travis-ci.org/lkrjunior/trabalhoArquitetura)
+![Heroku](https://heroku-badge.herokuapp.com/?app=upphotos-uniritter)
 
 #### Resumo
 
