@@ -64,7 +64,9 @@ public class PhotoController {
             List<Photo> photos = new ArrayList<>(person.get().getPhotos());
             photos = photoBO.FixPhotos(photos);
 
-            return SetModelViewList("photoView", photos);
+            ModelAndView viewForShowPhotos = SetModelViewList("photoView", photos);
+            viewForShowPhotos.addObject("titlePage", person.get().getName() + "\'s Photos");
+            return viewForShowPhotos;
         }
         else {
             return SetModelView("person", null);
