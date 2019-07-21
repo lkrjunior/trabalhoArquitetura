@@ -10,15 +10,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import repository.PersonRepository;
 import repository.PhotoRepository;
-
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class PhotoRepositoryTests {
+public class PhotoRepositoryTests
+{
     @Autowired
     PersonRepository repositoryPerson;
 

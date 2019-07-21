@@ -2,7 +2,8 @@ package bo;
 
 import cloudstorage.DropboxCloudStorage;
 import cloudstorage.ICloudStorageActions;
-import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.DbxClientV2;
+import com.uniritter.upphotos.DropboxConfig;
 import helpers.FileHelper;
 import model.*;
 import org.slf4j.Logger;
@@ -17,13 +18,24 @@ import java.util.Base64;
 import java.util.List;
 
 @Component
-public class PhotoBO {
+public class PhotoBO
+{
     private final String _photo_url_show_html = "data:image/jpg;base64,";
+    private final String _message_fail_upload = "Unable to upload a file to CloudStorage ";
+    private final String _name_cloud_dropbox = "Dropbox";
 
     private static final Logger logger = LoggerFactory.getLogger(PhotoBO.class);
 
     @Autowired
     private PhotoRepository photoRepository;
+
+    private DbxClientV2 GetDropboxClient()
+    {
+        DropboxConfig configDropbox = new DropboxConfig();
+        configDropbox.SetConfigurationForDropbox();
+
+        return configDropbox.GetDropboxClient();
+    }
 
     public List<Photo> FixPhotos(List<Photo> photos)
     {
@@ -55,28 +67,42 @@ public class PhotoBO {
     public String UploadFileToCloudStorage(byte[] fileBytes, String fileName)
     {
         String nameFileToUpload = FileHelper.GenerateNameFile() + "_" + fileName;
-        try {
+
+        try
+        {
             ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
-            dropboxCloudStorage.UploadFile(FileHelper.ConvertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
-        } catch (DbxException ex) {
+            boolean response = dropboxCloudStorage.UploadFile(GetDropboxClient(), FileHelper.ConvertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
+            if (!response)
+            {
+                throw new Exception(_message_fail_upload + _name_cloud_dropbox);
+            }
+        }
+        catch (Exception ex)
+        {
             logger.error(ex.getMessage());
         }
+
         return nameFileToUpload;
     }
 
     public byte[] DownloadFileToCloudStorage(String fileName)
     {
-        try {
+        try
+        {
             ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
-            InputStream input = dropboxCloudStorage.DownloadFile(fileName);
+            InputStream input = dropboxCloudStorage.DownloadFile(GetDropboxClient(), fileName);
             return FileHelper.ConvertInputStreamtoByteArray(input);
 
-        } catch (DbxException ex) {
+        }
+        catch (IOException ex)
+        {
             logger.error(ex.getMessage());
         }
-        catch (IOException ex) {
+        catch (Exception ex)
+        {
             logger.error(ex.getMessage());
         }
+
         return null;
     }
 }
