@@ -28,26 +28,35 @@ public class CloudStorageTests
     @Test
     public void DropboxUploadPhoto()
     {
+        ///region Arrange
         when(dropboxCloudStorage.UploadFile(client, photo, fileNameToTest)).thenReturn(true);
+        ///endregion
 
+        ///region Act
         boolean uploadPhotoSuccess = dropboxCloudStorage.UploadFile(client, photo, fileNameToTest);
+        ///endregion
 
-        verify(dropboxCloudStorage, times(1)).UploadFile(client, photo, fileNameToTest);
-
+        ///region Assert
         assertTrue(uploadPhotoSuccess);
+        verify(dropboxCloudStorage, times(1)).UploadFile(client, photo, fileNameToTest);
+        ///endregion
     }
 
     @Test
     public void DropboxDownloadPhoto()
     {
+        ///region Arrange
         InputStream photoCloud;
-
         when(dropboxCloudStorage.DownloadFile(client, fileNameToTest)).thenReturn(photo);
+        ///endregion
 
+        ///region Act
         photoCloud = dropboxCloudStorage.DownloadFile(client, fileNameToTest);
+        ///endregion
 
-        verify(dropboxCloudStorage, times(1)).DownloadFile(client, fileNameToTest);
-
+        ///region Assert
         assertTrue(photoCloud != null);
+        verify(dropboxCloudStorage, times(1)).DownloadFile(client, fileNameToTest);
+        ///endregion
     }
 }
