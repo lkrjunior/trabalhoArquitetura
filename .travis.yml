@@ -1,16 +1,25 @@
 language: java
 install: true
+dist: trusty
 
 jdk:
 - oraclejdk8
 
 script:
 - ./gradlew clean build test
+- ./gradlew sonarqube
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
+
+addons:
+  sonarcloud:
+    organization: "lkrjunior"
+    token:
+      secure: "b2f399b314c23a744fda8f2b29632d7739272072"
