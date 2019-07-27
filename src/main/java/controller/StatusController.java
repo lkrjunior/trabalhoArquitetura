@@ -34,27 +34,4 @@ public class StatusController {
     {
         return new ModelAndView("home");
     }
-
-    @GetMapping("/testjpainsert")
-    @ResponseBody
-    public String testJpaInsert()
-    {
-        personBO.testJpaInsert();
-        return "Insert Ok";
-    }
-
-    @GetMapping("/testjpalist")
-    @ResponseBody
-    public List<Person> testJpaList()
-    {
-        return personBO.testJpaList();
-    }
-
-    @GetMapping("/testjpadelete")
-    @ResponseBody
-    public String testJpaDelete()
-    {
-        personBO.testJpaDelete();
-        return "Delete Ok";
-    }
 }

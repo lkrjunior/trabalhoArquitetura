@@ -8,7 +8,7 @@ plugins {
 sonarqube {
 	properties {
 		property "sonar.projectKey", "upphotos"
-		property 'sonar.coverage.exclusions', "**/helpers/**/*,**/com/uniritter/upphotos/**/*,**/model/**/*,**/controller/**/*"
+		property 'sonar.coverage.exclusions', "**/helpers/**/*,**/com/uniritter/upphotos/**/*,**/model/**/*,**/controller/**/*,**/exception/**/*"
 	}
 }
 
@@ -60,7 +60,8 @@ jacocoTestCoverageVerification {
 					'helpers.*',
 					'model.*',
 					'controller.*',
-					'com.uniritter.upphotos.*'
+					'com.uniritter.upphotos.*',
+					'exception.*'
 			]
 		}
 	}
