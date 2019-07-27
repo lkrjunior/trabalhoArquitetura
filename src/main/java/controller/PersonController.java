@@ -37,10 +37,12 @@ public class PersonController {
     public ModelAndView edit(@PathVariable("id") Long id) {
 
         Optional<Person> person = personBO.FindOne(id);
-        if (person != null) {
+        if (person.isPresent())
+        {
             return add(person.get());
         }
-        else {
+        else
+        {
             return GetHomePerson();
         }
     }
@@ -49,7 +51,8 @@ public class PersonController {
     public ModelAndView delete(@PathVariable("id") Long id) {
 
         Optional<Person> person = personBO.FindOne(id);
-        if (person != null) {
+        if (person.isPresent())
+        {
             personBO.Delete(person.get());
         }
 

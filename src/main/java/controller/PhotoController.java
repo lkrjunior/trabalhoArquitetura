@@ -48,10 +48,12 @@ public class PhotoController {
     public ModelAndView upload(@PathVariable("id") Long id) {
 
         Optional<Person> person = personBO.FindOne(id);
-        if (person != null) {
+        if (person.isPresent())
+        {
             return SetModelView("photoAdd", photoBO.CreatePhotoWithPerson(person.get()));
         }
-        else {
+        else
+        {
             return SetModelView("person", null);
         }
     }
@@ -60,7 +62,8 @@ public class PhotoController {
     public ModelAndView viewAll(@PathVariable("id") Long id) {
 
         Optional<Person> person = personBO.FindOne(id);
-        if (person != null) {
+        if (person.isPresent())
+        {
             List<Photo> photos = new ArrayList<>(person.get().getPhotos());
             photos = photoBO.FixPhotos(photos);
 
@@ -68,7 +71,8 @@ public class PhotoController {
             viewForShowPhotos.addObject("titlePage", person.get().getName() + "\'s Photos");
             return viewForShowPhotos;
         }
-        else {
+        else
+        {
             return SetModelView("person", null);
         }
     }
@@ -76,7 +80,8 @@ public class PhotoController {
     @PostMapping(value = "/save", consumes = "multipart/form-data")
     @ResponseBody
     public ModelAndView SavePhoto(@RequestPart("file") MultipartFile file, @Valid Photo photo, BindingResult result) throws IOException {
-        if(result.hasErrors()) {
+        if(result.hasErrors())
+        {
             return GetHomePerson();
         }
 

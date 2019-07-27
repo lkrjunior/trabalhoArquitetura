@@ -24,21 +24,10 @@ public class DropboxCloudStorage implements ICloudStorageActions<InputStream, Db
         {
             client.files().uploadBuilder("/" + fileName).uploadAndFinish(file);
         }
-        catch (FileNotFoundException ex)
+        catch (IOException|DbxException ex)
         {
             logger.error(ex.getMessage());
-        }
-        catch (IOException ex)
-        {
-            logger.error(ex.getMessage());
-        }
-        catch (UploadErrorException ex)
-        {
-            logger.error(ex.getMessage());
-        }
-        catch (DbxException ex)
-        {
-            logger.error(ex.getMessage());
+            return false;
         }
 
         return true;

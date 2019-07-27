@@ -21,6 +21,7 @@ import static org.mockito.Mockito.*;
 public class CloudStorageTests
 {
     private String fileNameToTest = "filenamemock";
+    private String messageError = "Error to download file";
 
     private DbxClientV2 client;
     private DbxUserFilesRequests files;
@@ -82,6 +83,31 @@ public class CloudStorageTests
     }
 
     @Test
+    public void DropboxUploadPhotoDbxException()
+    {
+        ///region Arrange
+        try
+        {
+            when(client.files()).thenReturn(files);
+            when(files.uploadBuilder(any(String.class))).thenReturn(uploadBuilder);
+            when(uploadBuilder.uploadAndFinish(photo)).thenThrow(dbxException);
+        }
+        catch (IOException|DbxException e)
+        {
+            e.printStackTrace();
+        }
+        ///endregion
+
+        ///region Act
+        boolean uploadPhotoSuccess = dropboxCloudStorage.UploadFile(client, photo, fileNameToTest);
+        ///endregion
+
+        ///region Assert
+        assertFalse(uploadPhotoSuccess);
+        ///endregion
+    }
+
+    @Test
     public void DropboxDownloadPhoto()
     {
         ///region Arrange
@@ -118,7 +144,7 @@ public class CloudStorageTests
         try
         {
             when(client.files()).thenReturn(files);
-            when(files.download(any(String.class))).thenThrow(new DbxException("Error to download file"));
+            when(files.download(any(String.class))).thenThrow(new DbxException(messageError));
         }
         catch (DbxException e)
         {
