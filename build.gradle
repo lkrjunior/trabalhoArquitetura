@@ -46,3 +46,22 @@ dependencies {
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.28.2'
 	implementation 'com.dropbox.core:dropbox-core-sdk:3.1.1'
 }
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			element = 'CLASS'
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 0.6
+			}
+			excludes = [
+					'helpers.*',
+					'model.*',
+					'controller.*',
+					'com.uniritter.upphotos.*'
+			]
+		}
+	}
+}
