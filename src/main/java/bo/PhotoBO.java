@@ -4,6 +4,7 @@ import cloudstorage.DropboxCloudStorage;
 import cloudstorage.ICloudStorageActions;
 import com.dropbox.core.v2.DbxClientV2;
 import com.uniritter.upphotos.DropboxConfig;
+import exception.DropboxException;
 import helpers.FileHelper;
 import model.*;
 import org.slf4j.Logger;
@@ -40,7 +41,6 @@ public class PhotoBO
     public List<Photo> fixPhotos(List<Photo> photos)
     {
         for (Photo item : photos) {
-            //item.setPhotoString(PHOTO_URL_SHOW_HTML + Base64.getEncoder().encodeToString(item.getPhoto()));
             item.setPhotoString(PHOTO_URL_SHOW_HTML + Base64.getEncoder().encodeToString(downloadFileToCloudStorage(item.getLink())));
         }
         return photos;
@@ -57,7 +57,6 @@ public class PhotoBO
     public void save(Photo photo, MultipartFile file) throws IOException {
         byte[] fileToSave = file.getBytes();
 
-        //photo.setPhoto(fileToSave);
         String link = uploadFileToCloudStorage(fileToSave, file.getOriginalFilename());
         photo.setLink(link);
 
@@ -74,7 +73,7 @@ public class PhotoBO
             boolean response = dropboxCloudStorage.uploadFile(getDropboxClient(), FileHelper.convertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
             if (!response)
             {
-                throw new Exception(MESSAGE_FAIL_UPLOAD + NAME_CLOUD_DROPBOX);
+                throw new DropboxException(MESSAGE_FAIL_UPLOAD + NAME_CLOUD_DROPBOX);
             }
         }
         catch (Exception ex)
@@ -98,11 +97,7 @@ public class PhotoBO
         {
             logger.error(ex.getMessage());
         }
-        catch (Exception ex)
-        {
-            logger.error(ex.getMessage());
-        }
 
-        return null;
+        return new byte[0];
     }
 }
