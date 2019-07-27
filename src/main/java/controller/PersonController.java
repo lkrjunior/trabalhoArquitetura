@@ -18,10 +18,9 @@ public class PersonController {
     @Autowired
     PersonBO personBO;
 
-    private ModelAndView GetHomePerson()
+    private ModelAndView getHomePerson()
     {
-        ModelAndView modelAndView =  new ModelAndView("redirect:/person");
-        return modelAndView;
+        return new ModelAndView("redirect:/person");
     }
 
     @GetMapping("")
@@ -43,7 +42,7 @@ public class PersonController {
         }
         else
         {
-            return GetHomePerson();
+            return getHomePerson();
         }
     }
 
@@ -56,7 +55,7 @@ public class PersonController {
             personBO.delete(person.get());
         }
 
-        return GetHomePerson();
+        return getHomePerson();
     }
 
     @GetMapping("/add")
@@ -78,6 +77,6 @@ public class PersonController {
 
         personBO.save(person);
 
-        return GetHomePerson();
+        return getHomePerson();
     }
 }

@@ -10,5 +10,5 @@ public interface VersionRepository extends JpaRepository<Version, Long>
 {
     @Query("SELECT V \n"+
             " FROM Version V ")
-    Version GetVersion();
+    Version getVersion();
 }

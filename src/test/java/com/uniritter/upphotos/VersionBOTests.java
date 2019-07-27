@@ -29,7 +29,7 @@ public class VersionBOTests {
         Version version = new Version();
         version.setValue(versionNumber);
 
-        when(versionRepository.GetVersion()).thenReturn(version);
+        when(versionRepository.getVersion()).thenReturn(version);
 
         Version expectedVersion = versionBO.getVersion();
 

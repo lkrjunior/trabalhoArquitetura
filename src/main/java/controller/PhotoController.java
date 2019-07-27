@@ -24,8 +24,7 @@ public class PhotoController {
 
     private ModelAndView getHomePerson()
     {
-        ModelAndView modelAndView =  new ModelAndView("redirect:/person");
-        return modelAndView;
+        return new ModelAndView("redirect:/person");
     }
 
     private ModelAndView setModelView(String viewName, Photo photo)

@@ -4,7 +4,6 @@ import model.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import repository.VersionRepository;
-import javax.persistence.EntityNotFoundException;
 
 @Component
 public class VersionBO
@@ -14,6 +13,6 @@ public class VersionBO
 
     public Version getVersion()
     {
-        return this.repository.GetVersion();
+        return this.repository.getVersion();
     }
 }

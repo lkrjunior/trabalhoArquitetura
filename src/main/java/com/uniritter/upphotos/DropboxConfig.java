@@ -8,24 +8,23 @@ import java.util.Properties;
 @Component
 public class DropboxConfig
 {
-    private final String _properties = "cloudstorage.properties";
-    private final String _property_access_token = "dropbox.accesstoken";
-    private final String _clientidentifier = "dropbox/java-tutorial";
+    private static final String PROPERTIES = "cloudstorage.properties";
+    private static final String PROPERTY_ACCESS_TOKEN = "dropbox.accesstoken";
+    private static final String CLIENT_IDENTIFIER = "dropbox/java-tutorial";
 
     private String accessToken;
     private DbxClientV2 dropboxClient;
-    private DbxRequestConfig dropboxRequestConfig;
 
     public DropboxConfig()
     {
-        PropertiesConfig config = new PropertiesConfig(_properties);
+        PropertiesConfig config = new PropertiesConfig(PROPERTIES);
         Properties prop = config.getProperties();
-        accessToken = prop.getProperty(_property_access_token);
+        accessToken = prop.getProperty(PROPERTY_ACCESS_TOKEN);
     }
 
     public void setConfigurationForDropbox()
     {
-        dropboxRequestConfig = DbxRequestConfig.newBuilder(_clientidentifier).build();
+        DbxRequestConfig dropboxRequestConfig = DbxRequestConfig.newBuilder(CLIENT_IDENTIFIER).build();
         dropboxClient = new DbxClientV2(dropboxRequestConfig, accessToken);
     }
 

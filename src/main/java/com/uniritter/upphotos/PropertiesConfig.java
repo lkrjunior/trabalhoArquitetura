@@ -12,7 +12,7 @@ import java.util.Properties;
 @Component
 public class PropertiesConfig
 {
-    private static final String messageDontLoadConfig = "Unable to find properties ";
+    private static final String MESSAGE_DONT_LOAD_CONFIG = "Unable to find properties ";
 
     private static final Logger logger = LoggerFactory.getLogger(PropertiesConfig.class);
 
@@ -33,7 +33,7 @@ public class PropertiesConfig
             Properties prop = new Properties();
             if (input == null)
             {
-                System.out.println(messageDontLoadConfig + filePropertyName);
+                logger.error(MESSAGE_DONT_LOAD_CONFIG + filePropertyName);
                 return null;
             }
             prop.load(input);

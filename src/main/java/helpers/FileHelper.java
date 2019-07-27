@@ -4,6 +4,10 @@ import java.io.*;
 
 public class FileHelper {
 
+    private FileHelper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String generateNameFile()
     {
         return java.util.UUID.randomUUID().toString();
@@ -11,8 +15,7 @@ public class FileHelper {
 
     public static InputStream convertByteArrayFileToFileInputStream(byte[] file)
     {
-        InputStream input = new ByteArrayInputStream(file);
-        return input;
+        return new ByteArrayInputStream(file);
     }
 
     public static byte[] convertInputStreamtoByteArray(InputStream in) throws IOException
