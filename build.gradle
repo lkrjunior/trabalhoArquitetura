@@ -43,9 +43,10 @@ jacocoTestCoverageVerification {
 				minimum = 1.0
 			}
 			excludes = [
-					'helpers',
-					'model',
-					'controller'
+					'helpers.*',
+					'model.*',
+					'controller.*',
+                    'com.uniritter.upphotos.*'
 			]
 		}
 	}
