@@ -2,12 +2,26 @@ plugins {
 	id 'org.springframework.boot' version '2.1.6.RELEASE'
 	id 'java'
 	id "org.sonarqube" version "2.7"
+	id 'jacoco'
 }
 
 sonarqube {
 	properties {
 		property "sonar.projectKey", "upphotos"
 		property 'sonar.coverage.exclusions', "**/helpers/**/*,**/com/uniritter/upphotos/**/*,**/model/**/*,**/controller/**/*"
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.4"
+	reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
 	}
 }
 
