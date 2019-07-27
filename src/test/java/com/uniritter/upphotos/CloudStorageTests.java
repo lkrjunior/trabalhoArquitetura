@@ -74,7 +74,7 @@ public class CloudStorageTests
         ///endregion
 
         ///region Act
-        boolean uploadPhotoSuccess = dropboxCloudStorage.UploadFile(client, photo, fileNameToTest);
+        boolean uploadPhotoSuccess = dropboxCloudStorage.uploadFile(client, photo, fileNameToTest);
         ///endregion
 
         ///region Assert
@@ -99,7 +99,7 @@ public class CloudStorageTests
         ///endregion
 
         ///region Act
-        boolean uploadPhotoSuccess = dropboxCloudStorage.UploadFile(client, photo, fileNameToTest);
+        boolean uploadPhotoSuccess = dropboxCloudStorage.uploadFile(client, photo, fileNameToTest);
         ///endregion
 
         ///region Assert
@@ -126,7 +126,7 @@ public class CloudStorageTests
         ///endregion
 
         ///region Act
-        photoCloud = dropboxCloudStorage.DownloadFile(client, fileNameToTest);
+        photoCloud = dropboxCloudStorage.downloadFile(client, fileNameToTest);
         ///endregion
 
         ///region Assert
@@ -153,7 +153,7 @@ public class CloudStorageTests
         ///endregion
 
         ///region Act
-        photoCloud = dropboxCloudStorage.DownloadFile(client, fileNameToTest);
+        photoCloud = dropboxCloudStorage.downloadFile(client, fileNameToTest);
         ///endregion
 
         ///region Assert

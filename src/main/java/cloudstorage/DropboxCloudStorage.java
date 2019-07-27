@@ -4,11 +4,9 @@ import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
-import com.dropbox.core.v2.files.UploadErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,7 +16,7 @@ public class DropboxCloudStorage implements ICloudStorageActions<InputStream, Db
     private static final Logger logger = LoggerFactory.getLogger(DropboxCloudStorage.class);
 
     @Override
-    public boolean UploadFile(DbxClientV2 client, InputStream file, String fileName)
+    public boolean uploadFile(DbxClientV2 client, InputStream file, String fileName)
     {
         try
         {
@@ -34,7 +32,7 @@ public class DropboxCloudStorage implements ICloudStorageActions<InputStream, Db
     }
 
     @Override
-    public InputStream DownloadFile(DbxClientV2 client, String fileName)
+    public InputStream downloadFile(DbxClientV2 client, String fileName)
     {
         DbxDownloader<FileMetadata> file = null;
         try {

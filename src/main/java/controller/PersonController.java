@@ -28,7 +28,7 @@ public class PersonController {
     public ModelAndView findAll() {
 
         ModelAndView modelAndView = new ModelAndView("person");
-        modelAndView.addObject("persons", personBO.FindAll());
+        modelAndView.addObject("persons", personBO.findAll());
 
         return modelAndView;
     }
@@ -36,7 +36,7 @@ public class PersonController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
 
-        Optional<Person> person = personBO.FindOne(id);
+        Optional<Person> person = personBO.findOne(id);
         if (person.isPresent())
         {
             return add(person.get());
@@ -50,10 +50,10 @@ public class PersonController {
     @DeleteMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
 
-        Optional<Person> person = personBO.FindOne(id);
+        Optional<Person> person = personBO.findOne(id);
         if (person.isPresent())
         {
-            personBO.Delete(person.get());
+            personBO.delete(person.get());
         }
 
         return GetHomePerson();
@@ -70,13 +70,13 @@ public class PersonController {
 
     @PostMapping("/save")
     @ResponseBody
-    public ModelAndView SavePerson(@Valid Person person, BindingResult result)
+    public ModelAndView savePerson(@Valid Person person, BindingResult result)
     {
         if(result.hasErrors()) {
             return add(person);
         }
 
-        personBO.Save(person);
+        personBO.save(person);
 
         return GetHomePerson();
     }

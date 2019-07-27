@@ -22,39 +22,39 @@ public class StatusController {
 
     @GetMapping("/status")
     @ResponseBody
-    public String GetStatus()
+    public String getStatus()
     {
-        Version version = versionBO.GetVersion();
+        Version version = versionBO.getVersion();
         return version.getValue();
     }
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView Home()
+    public ModelAndView home()
     {
         return new ModelAndView("home");
     }
 
     @GetMapping("/testjpainsert")
     @ResponseBody
-    public String TestJpaInsert()
+    public String testJpaInsert()
     {
-        personBO.TestJpaInsert();
+        personBO.testJpaInsert();
         return "Insert Ok";
     }
 
     @GetMapping("/testjpalist")
     @ResponseBody
-    public List<Person> TestJpaList()
+    public List<Person> testJpaList()
     {
-        return personBO.TestJpaList();
+        return personBO.testJpaList();
     }
 
     @GetMapping("/testjpadelete")
     @ResponseBody
-    public String TestJpaDelete()
+    public String testJpaDelete()
     {
-        personBO.TestJpaDelete();
+        personBO.testJpaDelete();
         return "Delete Ok";
     }
 }

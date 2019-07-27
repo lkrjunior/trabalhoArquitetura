@@ -22,13 +22,13 @@ public class PhotoController {
     @Autowired
     PersonBO personBO;
 
-    private ModelAndView GetHomePerson()
+    private ModelAndView getHomePerson()
     {
         ModelAndView modelAndView =  new ModelAndView("redirect:/person");
         return modelAndView;
     }
 
-    private ModelAndView SetModelView(String viewName, Photo photo)
+    private ModelAndView setModelView(String viewName, Photo photo)
     {
         ModelAndView modelAndView = new ModelAndView(viewName);
         modelAndView.addObject("photo", photo);
@@ -36,7 +36,7 @@ public class PhotoController {
         return modelAndView;
     }
 
-    private ModelAndView SetModelViewList(String viewName, List<Photo> photos)
+    private ModelAndView setModelViewList(String viewName, List<Photo> photos)
     {
         ModelAndView modelAndView = new ModelAndView(viewName);
         modelAndView.addObject("photos", photos);
@@ -47,46 +47,46 @@ public class PhotoController {
     @GetMapping("/upload/{id}")
     public ModelAndView upload(@PathVariable("id") Long id) {
 
-        Optional<Person> person = personBO.FindOne(id);
+        Optional<Person> person = personBO.findOne(id);
         if (person.isPresent())
         {
-            return SetModelView("photoAdd", photoBO.CreatePhotoWithPerson(person.get()));
+            return setModelView("photoAdd", photoBO.createPhotoWithPerson(person.get()));
         }
         else
         {
-            return SetModelView("person", null);
+            return setModelView("person", null);
         }
     }
 
     @GetMapping("/all/{id}")
     public ModelAndView viewAll(@PathVariable("id") Long id) {
 
-        Optional<Person> person = personBO.FindOne(id);
+        Optional<Person> person = personBO.findOne(id);
         if (person.isPresent())
         {
             List<Photo> photos = new ArrayList<>(person.get().getPhotos());
-            photos = photoBO.FixPhotos(photos);
+            photos = photoBO.fixPhotos(photos);
 
-            ModelAndView viewForShowPhotos = SetModelViewList("photoView", photos);
+            ModelAndView viewForShowPhotos = setModelViewList("photoView", photos);
             viewForShowPhotos.addObject("titlePage", person.get().getName() + "\'s Photos");
             return viewForShowPhotos;
         }
         else
         {
-            return SetModelView("person", null);
+            return setModelView("person", null);
         }
     }
 
     @PostMapping(value = "/save", consumes = "multipart/form-data")
     @ResponseBody
-    public ModelAndView SavePhoto(@RequestPart("file") MultipartFile file, @Valid Photo photo, BindingResult result) throws IOException {
+    public ModelAndView savePhoto(@RequestPart("file") MultipartFile file, @Valid Photo photo, BindingResult result) throws IOException {
         if(result.hasErrors())
         {
-            return GetHomePerson();
+            return getHomePerson();
         }
 
-        photoBO.Save(photo, file);
+        photoBO.save(photo, file);
 
-        return GetHomePerson();
+        return getHomePerson();
     }
 }

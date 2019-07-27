@@ -19,17 +19,17 @@ public class DropboxConfig
     public DropboxConfig()
     {
         PropertiesConfig config = new PropertiesConfig(_properties);
-        Properties prop = config.GetProperties();
+        Properties prop = config.getProperties();
         accessToken = prop.getProperty(_property_access_token);
     }
 
-    public void SetConfigurationForDropbox()
+    public void setConfigurationForDropbox()
     {
         dropboxRequestConfig = DbxRequestConfig.newBuilder(_clientidentifier).build();
         dropboxClient = new DbxClientV2(dropboxRequestConfig, accessToken);
     }
 
-    public DbxClientV2 GetDropboxClient()
+    public DbxClientV2 getDropboxClient()
     {
         return dropboxClient;
     }

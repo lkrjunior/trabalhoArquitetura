@@ -4,7 +4,6 @@ import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import repository.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,7 @@ public class PersonBO
     @Autowired
     private PhotoRepository photoRepository;
 
-    public void TestJpaInsert()
+    public void testJpaInsert()
     {
         Person person = new Person();
         person.setName("Luciano");
@@ -38,32 +37,32 @@ public class PersonBO
         photoRepository.save(photo2);
     }
 
-    public List<Person> TestJpaList()
+    public List<Person> testJpaList()
     {
         return personRepository.findAll();
     }
 
-    public void TestJpaDelete()
+    public void testJpaDelete()
     {
         personRepository.deleteAll();
     }
 
-    public void Save(Person person)
+    public void save(Person person)
     {
         personRepository.save(person);
     }
 
-    public List<Person> FindAll()
+    public List<Person> findAll()
     {
         return personRepository.findAll();
     }
 
-    public Optional<Person> FindOne(long id)
+    public Optional<Person> findOne(long id)
     {
         return personRepository.findById(id);
     }
 
-    public void Delete(Person person)
+    public void delete(Person person)
     {
         personRepository.delete(person);
     }

@@ -29,24 +29,24 @@ public class PhotoBO
     @Autowired
     private PhotoRepository photoRepository;
 
-    private DbxClientV2 GetDropboxClient()
+    private DbxClientV2 getDropboxClient()
     {
         DropboxConfig configDropbox = new DropboxConfig();
-        configDropbox.SetConfigurationForDropbox();
+        configDropbox.setConfigurationForDropbox();
 
-        return configDropbox.GetDropboxClient();
+        return configDropbox.getDropboxClient();
     }
 
-    public List<Photo> FixPhotos(List<Photo> photos)
+    public List<Photo> fixPhotos(List<Photo> photos)
     {
         for (Photo item : photos) {
             //item.setPhotoString(_photo_url_show_html + Base64.getEncoder().encodeToString(item.getPhoto()));
-            item.setPhotoString(_photo_url_show_html + Base64.getEncoder().encodeToString(DownloadFileToCloudStorage(item.getLink())));
+            item.setPhotoString(_photo_url_show_html + Base64.getEncoder().encodeToString(downloadFileToCloudStorage(item.getLink())));
         }
         return photos;
     }
 
-    public Photo CreatePhotoWithPerson(Person person)
+    public Photo createPhotoWithPerson(Person person)
     {
         Photo photo = new Photo();
         photo.setPerson(person);
@@ -54,24 +54,24 @@ public class PhotoBO
         return photo;
     }
 
-    public void Save(Photo photo, MultipartFile file) throws IOException {
+    public void save(Photo photo, MultipartFile file) throws IOException {
         byte[] fileToSave = file.getBytes();
 
         //photo.setPhoto(fileToSave);
-        String link = UploadFileToCloudStorage(fileToSave, file.getOriginalFilename());
+        String link = uploadFileToCloudStorage(fileToSave, file.getOriginalFilename());
         photo.setLink(link);
 
         photoRepository.save(photo);
     }
 
-    public String UploadFileToCloudStorage(byte[] fileBytes, String fileName)
+    public String uploadFileToCloudStorage(byte[] fileBytes, String fileName)
     {
-        String nameFileToUpload = FileHelper.GenerateNameFile() + "_" + fileName;
+        String nameFileToUpload = FileHelper.generateNameFile() + "_" + fileName;
 
         try
         {
             ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
-            boolean response = dropboxCloudStorage.UploadFile(GetDropboxClient(), FileHelper.ConvertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
+            boolean response = dropboxCloudStorage.uploadFile(getDropboxClient(), FileHelper.convertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
             if (!response)
             {
                 throw new Exception(_message_fail_upload + _name_cloud_dropbox);
@@ -85,13 +85,13 @@ public class PhotoBO
         return nameFileToUpload;
     }
 
-    public byte[] DownloadFileToCloudStorage(String fileName)
+    public byte[] downloadFileToCloudStorage(String fileName)
     {
         try
         {
             ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
-            InputStream input = dropboxCloudStorage.DownloadFile(GetDropboxClient(), fileName);
-            return FileHelper.ConvertInputStreamtoByteArray(input);
+            InputStream input = dropboxCloudStorage.downloadFile(getDropboxClient(), fileName);
+            return FileHelper.convertInputStreamtoByteArray(input);
 
         }
         catch (IOException ex)

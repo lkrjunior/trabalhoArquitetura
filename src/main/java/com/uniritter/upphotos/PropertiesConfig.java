@@ -26,7 +26,7 @@ public class PropertiesConfig
         this.filePropertyName = filePropertyName;
     }
 
-    public Properties GetProperties()
+    public Properties getProperties()
     {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(filePropertyName))
         {
