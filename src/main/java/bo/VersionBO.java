@@ -12,7 +12,7 @@ public class VersionBO
     @Autowired
     private VersionRepository repository;
 
-    public Version getVersion() throws EntityNotFoundException
+    public Version getVersion()
     {
         return this.repository.GetVersion();
     }
