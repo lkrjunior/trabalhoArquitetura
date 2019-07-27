@@ -30,12 +30,64 @@ public class PhotoBO
     @Autowired
     private PhotoRepository photoRepository;
 
-    private DbxClientV2 getDropboxClient()
-    {
-        DropboxConfig configDropbox = new DropboxConfig();
-        configDropbox.setConfigurationForDropbox();
+    private ICloudStorageActions dropboxCloudStorage;
 
-        return configDropbox.getDropboxClient();
+    private DbxClientV2 dbxClientV2;
+
+    private void setConfiguration()
+    {
+        if (dropboxCloudStorage == null)
+        {
+            DropboxConfig configDropbox = new DropboxConfig();
+            configDropbox.setConfigurationForDropbox();
+
+            dbxClientV2 = configDropbox.getDropboxClient();
+            dropboxCloudStorage = new DropboxCloudStorage();
+        }
+    }
+
+    private String uploadFileToCloudStorage(byte[] fileBytes, String fileName)
+    {
+        String nameFileToUpload = FileHelper.generateNameFile() + "_" + fileName;
+
+        try
+        {
+            setConfiguration();
+            boolean response = dropboxCloudStorage.uploadFile(dbxClientV2, FileHelper.convertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
+            if (!response)
+            {
+                throw new DropboxException(MESSAGE_FAIL_UPLOAD + NAME_CLOUD_DROPBOX);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.error(ex.getMessage());
+        }
+
+        return nameFileToUpload;
+    }
+
+    private byte[] downloadFileToCloudStorage(String fileName)
+    {
+        try
+        {
+            setConfiguration();
+            InputStream input = dropboxCloudStorage.downloadFile(dbxClientV2, fileName);
+            return FileHelper.convertInputStreamtoByteArray(input);
+
+        }
+        catch (IOException ex)
+        {
+            logger.error(ex.getMessage());
+        }
+
+        return new byte[0];
+    }
+
+    public void setConfiguration(ICloudStorageActions cloudStorageConfiguration, DbxClientV2 client)
+    {
+        dropboxCloudStorage = cloudStorageConfiguration;
+        dbxClientV2 = client;
     }
 
     public List<Photo> fixPhotos(List<Photo> photos)
@@ -61,43 +113,5 @@ public class PhotoBO
         photo.setLink(link);
 
         photoRepository.save(photo);
-    }
-
-    public String uploadFileToCloudStorage(byte[] fileBytes, String fileName)
-    {
-        String nameFileToUpload = FileHelper.generateNameFile() + "_" + fileName;
-
-        try
-        {
-            ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
-            boolean response = dropboxCloudStorage.uploadFile(getDropboxClient(), FileHelper.convertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
-            if (!response)
-            {
-                throw new DropboxException(MESSAGE_FAIL_UPLOAD + NAME_CLOUD_DROPBOX);
-            }
-        }
-        catch (Exception ex)
-        {
-            logger.error(ex.getMessage());
-        }
-
-        return nameFileToUpload;
-    }
-
-    public byte[] downloadFileToCloudStorage(String fileName)
-    {
-        try
-        {
-            ICloudStorageActions dropboxCloudStorage = new DropboxCloudStorage();
-            InputStream input = dropboxCloudStorage.downloadFile(getDropboxClient(), fileName);
-            return FileHelper.convertInputStreamtoByteArray(input);
-
-        }
-        catch (IOException ex)
-        {
-            logger.error(ex.getMessage());
-        }
-
-        return new byte[0];
     }
 }

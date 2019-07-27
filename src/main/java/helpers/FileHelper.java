@@ -17,6 +17,11 @@ public class FileHelper {
 
     public static byte[] convertInputStreamtoByteArray(InputStream in) throws IOException
     {
+        if (in == null)
+        {
+            throw new IOException("InputStream is null");
+        }
+
         ByteArrayOutputStream os = new ByteArrayOutputStream();
 
         byte[] buffer = new byte[1024];
