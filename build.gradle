@@ -11,6 +11,7 @@ sonarqube {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group = 'com.uniritter'
 version = '0.0.1-SNAPSHOT'
