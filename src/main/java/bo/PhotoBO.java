@@ -20,9 +20,9 @@ import java.util.List;
 @Component
 public class PhotoBO
 {
-    private static final String photoUrlShowHtml = "data:image/jpg;base64,";
-    private static final String messageFailUpload = "Unable to upload a file to CloudStorage ";
-    private static final String nameCloudDropbox = "Dropbox";
+    private static final String PHOTO_URL_SHOW_HTML = "data:image/jpg;base64,";
+    private static final String MESSAGE_FAIL_UPLOAD = "Unable to upload a file to CloudStorage ";
+    private static final String NAME_CLOUD_DROPBOX = "Dropbox";
 
     private static final Logger logger = LoggerFactory.getLogger(PhotoBO.class);
 
@@ -40,8 +40,8 @@ public class PhotoBO
     public List<Photo> fixPhotos(List<Photo> photos)
     {
         for (Photo item : photos) {
-            //item.setPhotoString(photoUrlShowHtml + Base64.getEncoder().encodeToString(item.getPhoto()));
-            item.setPhotoString(photoUrlShowHtml + Base64.getEncoder().encodeToString(downloadFileToCloudStorage(item.getLink())));
+            //item.setPhotoString(PHOTO_URL_SHOW_HTML + Base64.getEncoder().encodeToString(item.getPhoto()));
+            item.setPhotoString(PHOTO_URL_SHOW_HTML + Base64.getEncoder().encodeToString(downloadFileToCloudStorage(item.getLink())));
         }
         return photos;
     }
@@ -74,7 +74,7 @@ public class PhotoBO
             boolean response = dropboxCloudStorage.uploadFile(getDropboxClient(), FileHelper.convertByteArrayFileToFileInputStream(fileBytes), nameFileToUpload);
             if (!response)
             {
-                throw new Exception(messageFailUpload + nameCloudDropbox);
+                throw new Exception(MESSAGE_FAIL_UPLOAD + NAME_CLOUD_DROPBOX);
             }
         }
         catch (Exception ex)
