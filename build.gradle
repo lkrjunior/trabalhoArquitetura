@@ -46,7 +46,7 @@ jacocoTestCoverageVerification {
 					'helpers.*',
 					'model.*',
 					'controller.*',
-                    'com.uniritter.upphotos.*'
+					'com.uniritter.upphotos.*'
 			]
 		}
 	}
