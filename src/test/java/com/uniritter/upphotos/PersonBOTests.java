@@ -13,6 +13,8 @@ import repository.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -45,7 +47,7 @@ public class PersonBOTests
 
         personBO.save(person);
 
-        assert(personResponse != null);
+        assertTrue(personResponse != null);
     }
 
     @Test
@@ -59,7 +61,7 @@ public class PersonBOTests
 
         List<Person> listPersonsExpected = personBO.findAll();
 
-        assert(listPersonsExpected.size() > 0);
+        assertTrue(listPersonsExpected.size() > 0);
     }
 
     @Test
@@ -72,7 +74,7 @@ public class PersonBOTests
 
         Optional<Person> personExpected = personBO.findOne(1);
 
-        assert(personExpected.isPresent());
+        assertTrue(personExpected.isPresent());
     }
 
     @Test
@@ -83,6 +85,6 @@ public class PersonBOTests
 
         personBO.delete(person);
 
-        assert(personResponse != null);
+        assertTrue(personResponse != null);
     }
 }

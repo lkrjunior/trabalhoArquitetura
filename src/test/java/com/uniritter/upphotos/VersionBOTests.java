@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import repository.VersionRepository;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +34,7 @@ public class VersionBOTests {
 
         Version expectedVersion = versionBO.getVersion();
 
-        assert(expectedVersion != null && expectedVersion.getValue() == versionNumber);
+        assertTrue(expectedVersion != null && expectedVersion.getValue() == versionNumber);
     }
 
 }

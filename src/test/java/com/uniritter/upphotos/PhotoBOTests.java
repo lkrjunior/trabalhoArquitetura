@@ -107,7 +107,7 @@ public class PhotoBOTests
         List<Photo> listPhotosExpected = photoBO.fixPhotos(photos);
 
         verify(dropboxCloudStorage, times(1)).downloadFile(any(DbxClientV2.class), any(String.class));
-        assert(listPhotosExpected.size() > 0);
+        assertTrue(listPhotosExpected.size() > 0);
         assertTrue(listPhotosExpected.get(0).getPhotoString() != null);
     }
 
@@ -130,7 +130,7 @@ public class PhotoBOTests
         List<Photo> listPhotosExpected = photoBO.fixPhotos(photos);
 
         verify(dropboxCloudStorage, times(1)).downloadFile(any(DbxClientV2.class), any(String.class));
-        assert(listPhotosExpected.size() > 0);
+        assertTrue(listPhotosExpected.size() > 0);
         assertTrue(listPhotosExpected.get(0).getPhotoString() != null);
     }
 
@@ -139,6 +139,6 @@ public class PhotoBOTests
     {
         Person person = new Person();
         Photo photo = photoBO.createPhotoWithPerson(person);
-        assert(photo != null);
+        assertTrue(photo != null);
     }
 }

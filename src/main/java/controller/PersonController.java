@@ -1,6 +1,7 @@
 package controller;
 
 import bo.PersonBO;
+import helpers.ConverterEntityDto;
 import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,8 @@ public class PersonController {
         Optional<Person> person = personBO.findOne(id);
         if (person.isPresent())
         {
-            return add(person.get());
+            PersonDto personDto = new ConverterEntityDto<PersonDto, Person>().Convert(PersonDto.class, person.get());
+            return add(personDto);
         }
         else
         {
@@ -59,8 +61,8 @@ public class PersonController {
     }
 
     @GetMapping("/add")
-    public ModelAndView add(Person person) {
-
+    public ModelAndView add(PersonDto person)
+    {
         ModelAndView modelAndView = new ModelAndView("personAdd");
         modelAndView.addObject("person", person);
 
@@ -69,13 +71,17 @@ public class PersonController {
 
     @PostMapping("/save")
     @ResponseBody
-    public ModelAndView savePerson(@Valid Person person, BindingResult result)
+    public ModelAndView savePerson(@Valid PersonDto person, BindingResult result)
     {
-        if(result.hasErrors()) {
+
+        if(result.hasErrors())
+        {
             return add(person);
         }
 
-        personBO.save(person);
+        Person personEntity = new ConverterEntityDto<Person, PersonDto>().Convert(Person.class, person);
+
+        personBO.save(personEntity);
 
         return getHomePerson();
     }

@@ -157,7 +157,7 @@ public class CloudStorageTests
         ///endregion
 
         ///region Assert
-        assert(photoCloud == null);
+        assertTrue(photoCloud == null);
         ///endregion
     }
 }

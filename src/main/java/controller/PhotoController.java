@@ -1,6 +1,7 @@
 package controller;
 
 import bo.*;
+import helpers.ConverterEntityDto;
 import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,13 +79,15 @@ public class PhotoController {
 
     @PostMapping(value = "/save", consumes = "multipart/form-data")
     @ResponseBody
-    public ModelAndView savePhoto(@RequestPart("file") MultipartFile file, @Valid Photo photo, BindingResult result) throws IOException {
+    public ModelAndView savePhoto(@RequestPart("file") MultipartFile file, @Valid PhotoDto photo, BindingResult result) throws IOException {
         if(result.hasErrors())
         {
             return getHomePerson();
         }
 
-        photoBO.save(photo, file);
+        Photo photoEntity = new ConverterEntityDto<Photo, PhotoDto>().Convert(Photo.class, photo);
+
+        photoBO.save(photoEntity, file);
 
         return getHomePerson();
     }

@@ -34,7 +34,7 @@ public class Photo implements Serializable {
 
     @Lob
     @Column(name = "PHOTO")
-    private byte[] photo;
+    private byte[] photoBytes;
 
     private String photoString;
 
@@ -67,12 +67,12 @@ public class Photo implements Serializable {
         this.person = person;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public byte[] getPhotoBytes() {
+        return photoBytes;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setPhotoBytes(byte[] photoBytes) {
+        this.photoBytes = photoBytes;
     }
 
     public String getPhotoString() {
