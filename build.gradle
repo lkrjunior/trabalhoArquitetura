@@ -9,6 +9,7 @@ sonarqube {
 	properties {
 		property "sonar.projectKey", "upphotos"
 		property 'sonar.coverage.exclusions', "**/helpers/**/*,**/com/uniritter/upphotos/**/*,**/model/**/*,**/controller/**/*,**/exception/**/*"
+		property 'sonar.cpd.exclusions', "**/model/**/*"
 	}
 }
 

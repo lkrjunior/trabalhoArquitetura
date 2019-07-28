@@ -85,7 +85,7 @@ public class PhotoController {
             return getHomePerson();
         }
 
-        Photo photoEntity = new ConverterEntityDto<Photo, PhotoDto>().Convert(Photo.class, photo);
+        Photo photoEntity = new ConverterEntityDto<Photo, PhotoDto>().convert(Photo.class, photo);
 
         photoBO.save(photoEntity, file);
 

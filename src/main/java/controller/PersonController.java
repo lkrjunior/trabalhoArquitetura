@@ -39,7 +39,7 @@ public class PersonController {
         Optional<Person> person = personBO.findOne(id);
         if (person.isPresent())
         {
-            PersonDto personDto = new ConverterEntityDto<PersonDto, Person>().Convert(PersonDto.class, person.get());
+            PersonDto personDto = new ConverterEntityDto<PersonDto, Person>().convert(PersonDto.class, person.get());
             return add(personDto);
         }
         else
@@ -79,7 +79,7 @@ public class PersonController {
             return add(person);
         }
 
-        Person personEntity = new ConverterEntityDto<Person, PersonDto>().Convert(Person.class, person);
+        Person personEntity = new ConverterEntityDto<Person, PersonDto>().convert(Person.class, person);
 
         personBO.save(personEntity);
 
