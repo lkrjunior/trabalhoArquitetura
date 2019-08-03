@@ -33,7 +33,8 @@ public class PropertiesConfig
             Properties prop = new Properties();
             if (input == null)
             {
-                logger.error(String.format("%s%s", MESSAGE_DONT_LOAD_CONFIG, filePropertyName));
+                String messageLog = String.format("%s%s", MESSAGE_DONT_LOAD_CONFIG, filePropertyName);
+                logger.error(messageLog);
                 return null;
             }
             prop.load(input);

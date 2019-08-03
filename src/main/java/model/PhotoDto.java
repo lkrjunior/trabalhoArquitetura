@@ -5,17 +5,11 @@ import java.util.Date;
 public class PhotoDto
 {
     private Long id;
-    private Date dateInclusion;
     private String link;
     private Person person;
     private byte[] photoBytes;
 
     private String photoString;
-
-    public PhotoDto()
-    {
-        dateInclusion = new Date();
-    }
 
     public Long getId() {
         return id;

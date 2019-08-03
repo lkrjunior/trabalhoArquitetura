@@ -2,6 +2,7 @@ package com.uniritter.upphotos;
 
 import bo.PhotoBO;
 import cloudstorage.DropboxCloudStorage;
+import cloudstorage.ICloudStorageActions;
 import com.dropbox.core.v2.DbxClientV2;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,8 @@ public class PhotoBOTests
     private MultipartFile file;
     @Mock
     private InputStream inputStream;
+    @Mock
+    private ICloudStorageActions iCloudStorageActions;
 
     @Autowired
     private PhotoBO photoBO;
@@ -140,5 +143,22 @@ public class PhotoBOTests
         Person person = new Person();
         Photo photo = photoBO.createPhotoWithPerson(person);
         assertTrue(photo != null);
+    }
+
+    @Test
+    public void saveWithInterfaceCloudStorageActions()
+    {
+        photoBO.setConfiguration(iCloudStorageActions, dbxClientV2);
+        try
+        {
+            when(iCloudStorageActions.uploadFile(any(DbxClientV2.class), any(InputStream.class), any(String.class))).thenReturn(true);
+            when(file.getBytes()).thenReturn(new byte[0]);
+            photoBO.save(photo, file);
+            verify(iCloudStorageActions, times(1)).uploadFile(any(DbxClientV2.class), any(InputStream.class), any(String.class));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

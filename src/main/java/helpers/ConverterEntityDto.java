@@ -4,9 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConverterEntityDto<TConverted, UClass>
+public class ConverterEntityDto<TYPETOCONVERT, CLASS>
 {
-    public TConverted convert(Class<TConverted> typeToConvert, UClass classToConvert)
+    public TYPETOCONVERT convert(Class<TYPETOCONVERT> typeToConvert, CLASS classToConvert)
     {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(classToConvert, typeToConvert);
