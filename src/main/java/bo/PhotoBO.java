@@ -38,17 +38,14 @@ public class PhotoBO
     {
         if (dropboxCloudStorage == null)
         {
-            DropboxConfig configDropbox = new DropboxConfig();
-            configDropbox.setConfigurationForDropbox();
-
-            dbxClientV2 = configDropbox.getDropboxClient();
+            dbxClientV2 = new DropboxConfig().getDropboxClient();
             dropboxCloudStorage = new DropboxCloudStorage();
         }
     }
 
     private String uploadFileToCloudStorage(byte[] fileBytes, String fileName)
     {
-        String nameFileToUpload = FileHelper.generateNameFile() + "_" + fileName;
+        String nameFileToUpload = String.format("%s_%s",FileHelper.generateNameFile(), fileName);
 
         try
         {
