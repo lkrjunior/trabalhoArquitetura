@@ -47,7 +47,6 @@ dependencies {
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.28.2'
 	implementation 'com.dropbox.core:dropbox-core-sdk:3.1.1'
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
-	compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 }
 
 jacocoTestCoverageVerification {
