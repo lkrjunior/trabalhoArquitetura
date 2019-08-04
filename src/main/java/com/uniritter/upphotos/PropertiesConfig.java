@@ -66,10 +66,10 @@ public class PropertiesConfig
     {
         String response = prop.getProperty(property);
 
-        //if (response == null || response.trim().isEmpty())
-        //{
-        //    response = System.getenv(property);
-        //}
+        if (response == null || response.trim().isEmpty())
+        {
+            response = System.getenv(property);
+        }
 
         return response;
     }

@@ -6,7 +6,7 @@ jdk:
 - oraclejdk8
 
 script:
-- ./gradlew clean build test
+- ./gradlew clean build test -Dspring.profiles.active=dev
 - ./gradlew sonarqube
 
 before_cache:
@@ -22,7 +22,7 @@ addons:
   sonarcloud:
     organization: "lkrjunior"
     token:
-      secure: $SONARCLOUD_TOKEN_SECURE
+      secure: "b2f399b314c23a744fda8f2b29632d7739272072"
 
 deploy:
   provider: heroku
