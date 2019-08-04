@@ -1,0 +1,1 @@
+web java -Dserver.port=$PORT $JAVA_OPTS -Ddropbox.accesstoken=$DROPBOX -jar build/libs/*.jar
