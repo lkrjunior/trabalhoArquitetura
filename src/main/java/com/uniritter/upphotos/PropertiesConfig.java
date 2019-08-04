@@ -12,6 +12,8 @@ import java.util.Properties;
 @Component
 public class PropertiesConfig
 {
+    private static final String DEFAULT_APPLICATION_PROPERTY = "application.properties";
+
     private static final String MESSAGE_DONT_LOAD_CONFIG = "Unable to find properties ";
 
     private static final Logger logger = LoggerFactory.getLogger(PropertiesConfig.class);
@@ -20,6 +22,18 @@ public class PropertiesConfig
     private Environment env;
 
     private String filePropertyName;
+
+    public static String getApplicationProperties(String value)
+    {
+        if (value == null || value.trim().isEmpty())
+        {
+            return DEFAULT_APPLICATION_PROPERTY;
+        }
+        else
+        {
+            return value;
+        }
+    }
 
     public PropertiesConfig(String filePropertyName)
     {
@@ -46,5 +60,17 @@ public class PropertiesConfig
         }
 
         return null;
+    }
+
+    public String getProperty(Properties prop, String property)
+    {
+        String response = prop.getProperty(property);
+
+        //if (response == null || response.trim().isEmpty())
+        //{
+        //    response = System.getenv(property);
+        //}
+
+        return response;
     }
 }
