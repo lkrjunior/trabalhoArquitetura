@@ -27,5 +27,5 @@ addons:
 deploy:
   provider: heroku
   api-key:
-    secure: $HEROKU_API_KEY
+    secure: "f4a60429-abff-408e-a92e-dda58557e76d"
   app: trabalhoarquitetura
