@@ -27,6 +27,10 @@ public class DropboxConfig
             PropertiesConfig config = new PropertiesConfig(preoperties);
             Properties prop = config.getProperties();
             String accessToken = prop.getProperty(PROPERTY_ACCESS_TOKEN);
+            if (accessToken == null || accessToken.isEmpty())
+            {
+                accessToken = System.getenv(PROPERTY_ACCESS_TOKEN);
+            }
 
             DbxRequestConfig dropboxRequestConfig = DbxRequestConfig.newBuilder(CLIENT_IDENTIFIER).build();
             dropboxClient = new DbxClientV2(dropboxRequestConfig, accessToken);
