@@ -10,7 +10,7 @@ import java.util.Properties;
 @Component
 public class DropboxConfig
 {
-    private static final String PROPERTIES = "cloudstorage.properties";
+    private static final String PROPERTIES = "APPLICATION_PROPERTIES";
     private static final String PROPERTY_ACCESS_TOKEN = "dropbox.accesstoken";
     private static final String CLIENT_IDENTIFIER = "dropbox/upphotos";
     private static final String MESSAGE_ERROR = "Unable to instance DbxClientV2";
@@ -23,7 +23,8 @@ public class DropboxConfig
     {
         try
         {
-            PropertiesConfig config = new PropertiesConfig(PROPERTIES);
+            String preoperties = System.getenv(PROPERTIES);
+            PropertiesConfig config = new PropertiesConfig(preoperties);
             Properties prop = config.getProperties();
             String accessToken = prop.getProperty(PROPERTY_ACCESS_TOKEN);
 

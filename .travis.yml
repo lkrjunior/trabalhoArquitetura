@@ -22,4 +22,10 @@ addons:
   sonarcloud:
     organization: "lkrjunior"
     token:
-      secure: "b2f399b314c23a744fda8f2b29632d7739272072"
+      secure: $SONARCLOUD_TOKEN_SECURE
+
+deploy:
+  provider: heroku
+  api-key:
+    secure: $HEROKU_API_KEY
+  app: trabalhoarquitetura
